@@ -1,0 +1,89 @@
+/* Mise en page du guide méthodologique (WeasyPrint).
+   Palette UTT : modifiez uniquement ces variables pour changer les couleurs. */
+:root {
+  --utt-bleu: #002B5C;      /* bleu foncé UTT : titres, bandeau, en-têtes de tableaux */
+  --utt-bleu-moyen: #1D5FA8;/* accent : sous-titres d'étapes, liens */
+  --utt-bleu-clair: #E7EEF7;/* fonds légers : en-têtes de tableaux, encadrés */
+  --texte: #1E2A38;
+  --gris: #5B6675;
+  --trait: #C9D3E0;
+}
+
+@page {
+  size: A4;
+  margin: 22mm 20mm 20mm 20mm;
+  @bottom-left { content: "SVN Studio — Guide méthodologique"; font: 7.5pt "Inter"; color: var(--gris); }
+  @bottom-right { content: counter(page); font: 7.5pt "Inter"; color: var(--gris); }
+}
+@page cover { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+
+html { font-family: "Charter", "Caladea", "DejaVu Serif", serif; font-size: 10.2pt; line-height: 1.45; color: var(--texte); }
+body { margin: 0; }
+p { margin: 0 0 6pt; text-align: justify; hyphens: auto; }
+strong { color: #0F1B2A; }
+a { color: var(--utt-bleu-moyen); text-decoration: none; }
+
+/* ---------- Couverture ---------- */
+.cover { page: cover; height: 297mm; position: relative; background: #fff; }
+.cover .band { position: absolute; left: 0; top: 0; bottom: 0; width: 16mm; background: var(--utt-bleu); }
+.cover .band::after { content: ""; position: absolute; right: -3mm; top: 0; bottom: 0; width: 3mm;
+  background: var(--utt-bleu-moyen); }
+.cover .inner { position: absolute; left: 34mm; right: 24mm; top: 0; bottom: 0; }
+.cover .top { position: absolute; top: 26mm; font: 500 8.5pt "Inter"; letter-spacing: .04em; color: var(--gris); }
+.cover .middle { position: absolute; top: 92mm; left: 0; right: 0; }
+.cover .kicker { font: 600 9pt "Inter"; letter-spacing: .18em; text-transform: uppercase; color: var(--utt-bleu-moyen); }
+.cover h1 { font: 800 44pt/1.05 "Inter"; color: var(--utt-bleu); margin: 4mm 0 8mm; letter-spacing: -.01em; }
+.cover .rule { width: 28mm; height: 1.6mm; background: var(--utt-bleu); margin-bottom: 8mm; }
+.cover .subtitle { font-size: 13pt; line-height: 1.45; color: #2C3A4C; text-align: left; }
+.cover .lead { margin-top: 9mm; font-size: 10pt; color: var(--gris); text-align: left; }
+.cover .meta { position: absolute; bottom: 26mm; left: 0; font: 8.5pt "Inter"; color: var(--texte); }
+.cover .meta td { padding: 1.4mm 8mm 1.4mm 0; border: none; background: none; }
+.cover .meta td:first-child { font-weight: 700; color: var(--utt-bleu); }
+
+/* ---------- Sommaire ---------- */
+.toc { break-after: page; }
+.toc h2 { break-before: avoid; }
+.toc ul { list-style: none; padding: 0; margin: 0; }
+.toc li { font: 8.6pt "Inter"; border-bottom: 0.6pt dashed var(--trait); padding: 2.6mm 0 2.2mm; }
+.toc li.l2 { font-weight: 600; color: var(--utt-bleu); }
+.toc li.l3 { padding-left: 7mm; color: #3A4656; font-size: 8.2pt; }
+.toc a { color: inherit; }
+.toc a::after { content: target-counter(attr(href), page); float: right; color: var(--gris); font-weight: 400; }
+
+/* ---------- Titres ---------- */
+h2 { font: 700 15pt "Inter"; color: var(--utt-bleu); margin: 0 0 5mm; padding-bottom: 2.6mm;
+  border-bottom: 1.4pt solid var(--utt-bleu); break-before: page; break-after: avoid; }
+h2 .num { display: inline-block; min-width: 7mm; color: var(--utt-bleu-moyen); }
+h3 { font: 600 11pt "Inter"; color: var(--utt-bleu-moyen); margin: 7mm 0 3mm; break-after: avoid; }
+h4 { font: 600 9.8pt "Inter"; color: var(--utt-bleu); margin: 5mm 0 2mm; break-after: avoid; }
+
+/* ---------- Listes ---------- */
+ul, ol { margin: 0 0 7pt; padding-left: 6mm; }
+li { margin-bottom: 2.4pt; }
+ul li::marker { color: var(--utt-bleu-moyen); }
+ol li::marker { color: var(--utt-bleu); font-family: "Inter"; font-weight: 600; }
+
+/* ---------- Code ---------- */
+code { font: 7.8pt "DejaVu Sans Mono"; background: var(--utt-bleu-clair); color: var(--utt-bleu);
+  padding: .5pt 2.5pt; border-radius: 2pt; }
+pre { background: #F3F6FA; border: 0.6pt solid var(--trait); border-left: 2.4pt solid var(--utt-bleu);
+  padding: 3mm 4mm; border-radius: 2pt; break-inside: avoid; }
+pre code { background: none; padding: 0; color: var(--texte); }
+
+/* ---------- Tableaux ---------- */
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 5mm; font-size: 8.3pt; break-inside: avoid; }
+th { font: 600 7.8pt "Inter"; color: #fff; background: var(--utt-bleu); text-align: left; padding: 2.2mm 2.4mm; }
+td { padding: 1.9mm 2.4mm; border-bottom: 0.6pt solid var(--trait); text-align: left; }
+tbody tr:nth-child(even) td { background: #F5F8FC; }
+
+/* ---------- Encadrés ---------- */
+blockquote { margin: 4mm 0; padding: 3mm 4mm; background: var(--utt-bleu-clair);
+  border-left: 2.6pt solid var(--utt-bleu); border-radius: 0 2pt 2pt 0; break-inside: avoid; }
+blockquote p { margin: 0; font-size: 9pt; color: var(--utt-bleu); }
+
+/* ---------- Figures ---------- */
+figure { margin: 3mm 0 5mm; break-inside: avoid; text-align: center; }
+figure img { max-width: 100%; max-height: 120mm; border: 0.6pt solid var(--trait); border-radius: 2pt; }
+figcaption { font: italic 7.6pt "Inter"; color: var(--gris); margin-top: 2mm; }
+figcaption b { font-style: normal; color: var(--utt-bleu); font-weight: 600; }
+hr { display: none; }
